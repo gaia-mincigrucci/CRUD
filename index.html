@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestione CRUD</title>
+</head>
+<body>
+
+    <form action="persona.php" method="POST">
+        <label for="operazioneCRUD">Operazione:</label>
+        <select name="action" id="operazioneCRUD">
+            <option value="CREATE">Inserisci Nuova Persona</option>
+            <option value="READ">Cerca Persona (ID)</option>
+            <option value="UPDATE">Aggiorna Dati (ID)</option>
+            <option value="DELETE">Elimina Persona (ID)</option>
+        </select>
+
+        <br><br>
+
+        <input type="number" name="id" id="inputID" placeholder="Inserisci ID">
+
+        <div id="sezioneDatiAnagrafici">
+            <br>
+            <input type="text" name="nome" placeholder="Nome"><br>
+            <input type="text" name="cognome" placeholder="Cognome"><br>
+            <input type="email" name="email" placeholder="Email"><br>
+            <input type="date" name="data_nascita">
+        </div>
+
+        <br><br>
+        <button type="submit">Esegui Operazione</button>
+    </form>
+
+    <script>
+        const operazione = document.getElementById('operazioneCRUD');
+        const inputIdentificativo = document.getElementById('inputID');
+        const divDatiAnagrafici = document.getElementById('sezioneDatiAnagrafici');
+
+        const aggiornaInterfacciaForm = () => {
+            const valoreSelezionato = operazione.value;
+
+            if (valoreSelezionato === 'CREATE') {
+                inputIdentificativo.style.display = 'none';
+            } else {
+                inputIdentificativo.style.display = 'inline-block';
+            }
+
+            if (valoreSelezionato === 'CREATE' || valoreSelezionato === 'UPDATE') {
+                divDatiAnagrafici.style.display = 'block';
+            } else {
+                divDatiAnagrafici.style.display = 'none';
+            }
+        };
+
+        operazione.addEventListener('change', aggiornaInterfacciaForm);
+
+        aggiornaInterfacciaForm();
+    </script>
+
+</body>
+</html>
